@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Microsoft.AspNetCore.App" />
+    <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="MediatR" />
+    <None Remove="MediatR.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Idiomas\UsarIdioma.pt-BR" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GS.Backend.Dominios\GS.Backend.Dominios.csproj" />
+    <ProjectReference Include="..\GS.Backend.ServicosExternos\GS.Backend.ServicosExternos.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Idiomas\UsarIdioma.en-US.Designer.cs">
+      <DependentUpon>Dominios.Configuracoes.UsarIdioma.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Idiomas\UsarIdioma.es-ES.Designer.cs">
+      <DependentUpon>Dominios.Configuracoes.UsarIdioma.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Idiomas\UsarIdioma.pt-BR.Designer.cs">
+      <DependentUpon>UsarIdioma.pt-BR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Idiomas\UsarIdioma.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Idiomas\UsarIdioma.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Idiomas\UsarIdioma.pt-BR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

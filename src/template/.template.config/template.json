@@ -1,0 +1,15 @@
+﻿{
+  "author": "Guilherme Silva",
+  "classfications": [ "Web", "WebAPI", "BFF" ],
+  "name": "Modelo API",
+  "defaultName": "Gs.Bke.ModeloApi",
+  "identity": "Gs.Bke.ModeloApi",
+  "groupIdentity": "Gs.Bke",
+  "shortName": "gsapi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Gs.Bke.ModeloApi",
+  "preferNameDirectory": true
+}

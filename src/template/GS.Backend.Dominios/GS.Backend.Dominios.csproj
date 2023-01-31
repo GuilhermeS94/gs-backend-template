@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Notificacoes\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="FluentValidation.AspNetCore" />
+    <None Remove="Middlewares\" />
+    <None Remove="Excecoes\" />
+    <None Remove="Comandos\" />
+    <None Remove="MediatR" />
+    <None Remove="Modelos\" />
+    <None Remove="Modelos\Resultados\" />
+    <None Remove="ServicosExternos\" />
+    <None Remove="ServicosExternos\Saidas\" />
+    <None Remove="Modelos\Entradas\" />
+    <None Remove="Validacoes\" />
+    <None Remove="Processadores\" />
+    <None Remove="Mapster" />
+    <None Remove="Idiomas\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notificacoes\" />
+    <Folder Include="Middlewares\" />
+    <Folder Include="Excecoes\" />
+    <Folder Include="Comandos\" />
+    <Folder Include="Modelos\" />
+    <Folder Include="Modelos\Resultados\" />
+    <Folder Include="ServicosExternos\" />
+    <Folder Include="ServicosExternos\Saidas\" />
+    <Folder Include="Modelos\Entradas\" />
+    <Folder Include="Validacoes\" />
+    <Folder Include="Processadores\" />
+    <Folder Include="Idiomas\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Idiomas\UsarIdioma.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UsarIdioma.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Idiomas\UsarIdioma.pt-BR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UsarIdioma.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Idiomas\UsarIdioma.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UsarIdioma.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Idiomas\UsarIdioma.en-US.Designer.cs">
+      <DependentUpon>UsarIdioma.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Idiomas\UsarIdioma.pt-BR.Designer.cs">
+      <DependentUpon>UsarIdioma.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Idiomas\UsarIdioma.es-ES.Designer.cs">
+      <DependentUpon>UsarIdioma.es-ES.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

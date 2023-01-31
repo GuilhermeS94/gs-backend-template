@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="template\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="template\" />
+    <Folder Include="template\.template.config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="template\.template.config\template.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="template\**\*" Exclude="template\**\bin\**;template\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+</Project>
