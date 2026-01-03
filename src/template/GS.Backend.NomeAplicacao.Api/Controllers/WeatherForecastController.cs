@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
-namespace GS.Backend.Ms.Controllers;
+namespace GS.Backend.NomeAplicacao.Api.Controllers;
 
 [ApiController]
 [Route("healthcheck")]
@@ -27,6 +27,7 @@ public class WeatherForecastController : ControllerBase
     [HttpPost("testar")]
     public async Task<IActionResult> PostTestar([FromBody] TestarComando comando)
     {
+        _logger.LogInformation("[POST][healthcheck/testar] - {@Comando}", comando);
         TestarResultado saida = await _mediator.Send(comando);
 
         return Ok(saida);

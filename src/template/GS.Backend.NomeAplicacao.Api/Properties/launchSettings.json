@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "GS.Backend.Ms": {
+    "GS.Backend.NomeAplicacao.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

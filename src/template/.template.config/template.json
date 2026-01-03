@@ -1,15 +1,20 @@
 ﻿{
   "author": "Guilherme Silva",
   "classfications": [ "Web", "WebAPI", "BFF" ],
-  "name": "Modelo API",
-  "defaultName": "Gs.Bke.ModeloApi",
-  "identity": "Gs.Bke.ModeloApi",
-  "groupIdentity": "Gs.Bke",
-  "shortName": "gsapi",
+  "name": "Base de API",
+  "description": "Modelo de API com a base pronta para replicar e agilizar o desenvolvimento.",
+  "groupIdentity": "GS.Backend",
+  "identity": "GS.Backend.ModeloApi",
+  "shortName": "gs-api",
+  "defaultName": "GsApi",
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution",
+    "version": "net7.0"
   },
-  "sourceName": "Gs.Bke.ModeloApi",
-  "preferNameDirectory": true
+  "sourceName": "NomeAplicacao",
+  "preferNameDirectory": true,
+  "primaryOutputs": [
+      { "path": "GS.NomeAplicacao.sln" }
+  ]
 }

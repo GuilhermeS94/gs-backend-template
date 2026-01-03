@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1703.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS.Backend.Ms", "GS.Backend.Ms\GS.Backend.Ms.csproj", "{A241FC59-6D3A-4186-ACD7-1510AFF48111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS.Backend.NomeAplicacao.Api", "GS.Backend.NomeAplicacao.Api\GS.Backend.NomeAplicacao.Api.csproj", "{A241FC59-6D3A-4186-ACD7-1510AFF48111}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS.Backend.Infra", "GS.Backend.Infra\GS.Backend.Infra.csproj", "{B7DEB7C5-899E-4A8C-8851-6CFD979E61D3}"
 EndProject

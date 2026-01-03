@@ -1,28 +1,76 @@
 ﻿using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
-using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using GS.Backend.Dominios.Notificacoes;
 using GS.Backend.Dominios.Middlewares;
-using FluentValidation.AspNetCore;
 using FluentValidation;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using Microsoft.Extensions.Options;
 using MediatR;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using GS.Backend.Dominios.Comandos;
 using GS.Backend.Dominios.ServicosExternos;
 using GS.Backend.ServicosExternos;
+using Serilog;
+using Serilog.Templates;
+using Serilog.Formatting.Compact;
+using Serilog.Formatting.Json;
 
 namespace GS.Backend.Infra;
-public static class Configuracoes
+public static class AddConfiguracoesServices
 {
+    public static IServiceCollection Init(this IServiceCollection services, IConfiguration appconfig)
+    {
+        services.AddIdiomas()
+        .AddControllers();
+        
+        services.AddConfiguracoesCors();
+
+        services.AddMvcCore(options => options.Filters.Add<NotificacoesFiltro>())
+        .AddApiExplorer()
+        .AddNewtonsoftJson();
+
+        services.AddSwaggerCustomizado()
+        .AddOptions();
+
+        services.AddHealthChecks();
+
+        services
+        .AddConfiguraoesLogs()
+        .AddHttpClient()
+        .AddFiltros()
+        .AddServicosExternos()
+        .AddComandos();
+
+        // services.AddConfiguracoesApi()
+        // .AddHttpClient()
+        // .AddFiltros()
+        // .AddServicosExternos()
+        // .AddComandos();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adicionar configuracoes de Cross Origin Request (CORS)
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddConfiguracoesCors(this IServiceCollection services)
+    {
+        services.AddCors(options => {
+            options.AddDefaultPolicy(policy => {
+                policy.AllowAnyOrigin();
+                policy.AllowAnyMethod();
+                policy.AllowAnyHeader();
+            });
+        });
+
+        return services;
+    }
+
     /// <summary>
     /// Adicionar endpoint e documentacao de swagger
     /// </summary>
@@ -118,17 +166,6 @@ public static class Configuracoes
     }
 
     /// <summary>
-    /// Adicionar Middlewares
-    /// </summary>
-    /// <param name="app"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder AddMiddlewaresCustomizados(this IApplicationBuilder app)
-    {
-        app.UseMiddleware<TratamentoExcecao>();
-        return app;
-    }
-
-    /// <summary>
     /// Configurar os idiomas da aplicacao
     /// e setar um default
     /// </summary>
@@ -152,11 +189,46 @@ public static class Configuracoes
                 string escolherUmIdioma = idiomaRequest.Split(',').FirstOrDefault();
                 string idiomaDefault = (string.IsNullOrEmpty(escolherUmIdioma) ||
                                         !idiomasDaAplicacao.Contains(new CultureInfo(escolherUmIdioma))) ?
-                                        "pt-BR" : escolherUmIdioma;
+                                        idiomasDaAplicacao[1].Name : escolherUmIdioma;
 
                 return Task.FromResult<ProviderCultureResult?>(new ProviderCultureResult(idiomaDefault, idiomaDefault));
             }));
         });
+
+        return services;
+    }
+
+
+    /// <summary>
+    /// Configurar os logs da aplicacao
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddConfiguraoesLogs(this IServiceCollection services)
+    {
+        services.AddConfiguraoesSerilog();
+        return services;
+    }
+
+    public static IServiceCollection AddConfiguraoesSerilog(this IServiceCollection services)
+    {
+        // Log.Logger = new LoggerConfiguration()
+        // // .WriteTo.Console(new JsonFormatter()).CreateLogger();
+        // // .WriteTo.Console(new CompactJsonFormatter(
+        // //     //"{ {@t, @mt, @l: if @l = 'Information' then undefined() else @l, @x, ..@p} }\n"
+        // // ))
+        // .WriteTo.Console(new JsonFormatter())
+        // //.WriteTo.Console(new CompactJsonFormatter())
+        // .CreateLogger();
+        //.WriteTo.Console(new RenderedCompactJsonFormatter()).CreateLogger();
+        //"formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact" 
+        //"outputTemplate": "[{Timestamp:dd/MM/yyyy HH:mm:ss} {Level:u3} {SourceContext:j} {Message:j} {Properties:j} {NewLine} {Exception}]",
+        //"outputTemplate": "{ Momento: {Timestamp:HH:mm:ss}, Urgencia: Level:u3, Body: SourceContext, Mensagem: Message:1, NewLine:1, Exception:1 }",
+        //          "formatter": "Serilog.Templates.ExpressionTemplate, Serilog.Expressions",
+        // "formatter": {
+        //     "type": "Serilog.Templates.ExpressionTemplate, Serilog.Expressions",
+        //     "template": "[{@t:dd/MM/yyyy HH:mm:ss} {@l:u3}] {@m}\n{@x}"
+        // }
 
         return services;
     }
